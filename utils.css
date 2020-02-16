@@ -1,0 +1,266 @@
+/*
+* FLOW
+* A tiny utility that helps with rhythm by adding margin to siblings
+*
+* --flow-space: The amount of space between siblings: Default 1em;
+*/
+.flow {
+  --flow-space: 1em;
+}
+
+.flow > * + * {
+  margin-top: 1em;
+  margin-top: var(--flow-space);
+}
+
+/*
+* VISUALLY HIDDEN UTILITY
+*
+* This does exactly what it says on the tin. It hides the element visually, but the content is still accessible to 
+* assistive technology like screen readers. 
+*/
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+/*
+* FULL BLEED
+* A little utility that makes the element 100% of the viewport’s width and still maintain its flow within its parent container.
+
+* We set the container to be width: 100vw, which equates to the full viewport width. We couldn’t set it to width: 100% because 
+* it would only fill the space of its parent element. The parent element’s width is useful though, because by setting 
+* margin-left: 50%, we are telling the component to align its left edge to the center of its parent element, 
+* because 50% is half of the parent element’s width.
+
+* Finally, we use CSS transforms to translateX(-50%). Because the transform works off the element’s dimensions and not 
+* the parent’s dimensions, it’ll pull the element back 50vw, because it’s 100vw wide, thus making it sit perfectly flush 
+* with the viewport’s edges.
+*/
+.full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 
+* ASPECT RATIO
+* We’ve got two separate classes that specify a ratio and then a shared bit of CSS that is common to both.
+* 
+* The .aspect-ratio-* class creates a relatively positioned container because its direct descendant is absolutely positioned. 
+* Adding a top padding value of X% means that the container will have X% of its own width as vertical padding.
+*
+* This padding value is the magic of the aspect ratio utility, because no matter how wide or narrow the container gets, 
+* the height will always be relative to its width. It’s a tidy little CSS algorithm.
+*
+* The absolute positioning serves two purposes, too: it makes it easier for the child element to fill its 
+* container—but more crucially—it prevents that child element from affecting its parent’s padding.
+*
+* 🔥 Pro tip: The [class*=''] selector looks for elements that contain whatever you put in the quotes. 
+* It’s handy for querying parts of a selector when you’re not 100% sure of an element’s construction.
+*
+*/
+[class*='ratio-'] {
+  display: block;
+  position: relative;
+}
+
+[class*='ratio-'] > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.aspect-ratio-wide {
+  padding-top: 56.25%;
+}
+
+.aspect-ratio-square {
+  padding-top: 100%;
+}
+
+/*
+* SCROLL TRACK
+* This utility leans on flexbox’s default behaviour, where it will automatically layout items horizontally if there’s no 
+* intervention from a flex-wrap rule. By setting overflow-x to auto and the child items to flex-shrink: 0, 
+* we get a nice, resilient overflow mechanism where items will size themselves, but not shrink as they run out of space.
+*
+* Because display: flex behaves like display: block in terms of flow, the .scroll-track element will fill the remaining 
+* horizontal space by default. We can mitigate this by creating a modifier that will change it to display: inline-flex, 
+* which makes it behave more like an inline-block element.
+*
+* This .scroll-track--fluid BEM modifier does exactly that. If the parent, (which in the context of the gallery example is the <body>)
+* has text-align: center set, the .scroll-track element will sit horizontally centered by default. 
+* This makes an already handy and progressive utility even more useful.
+*/
+.scroll-track {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-track--fluid {
+  display: inline-flex;
+}
+
+.scroll-track > * {
+  flex-shrink: 0;
+}
+
+/*
+* AUTO GRID
+* A fully responsive grid that uses no media queries to work across all viewports
+*
+* What this CSS does is lay out your grid items with a fixed minimum width. It then expands to fill remaining available 
+* space where it can, because we use a fractal unit (1fr) for its max width value. 
+* The remaining available space is split up equally between the items inside .auto-grid, 
+* so by using 1fr as the max value for each item, we use x% of the remaining available space per item. 
+* This means that if there are 10 items, x is equal to 10% of the remaining available space. 
+* This is how we get that nice flexibility with a light seasoning of absolute control that we’re after.
+*
+* 🔥 Pro tip: The --auto-grid-min-size Custom Property powers the minimum width. 
+* Set as a Custom Property because I never know where this layout will appear—so by making the min-width easily configurable, 
+* it can be modified to work in specific contexts. This is handy for design system work.
+*/
+.auto-grid {
+  --auto-grid-min-size: 16rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: 1rem;
+}
+
+/*
+* AUTO GRID WITH PROGRESSIVE ENHANCEMENT
+* As the code block demonstrates, the minimum viable experience removes that default style using @supports which detects CSS Grid support. 
+* This sample will work fine all the way back to super old IE browser versions. 
+* You could even use floats and Flexbox if you absolutely wanted a grid-like layout for all browsers. 
+* You could also use the Scroll Track Utility as a happy medium.
+*/
+.auto-grid {
+  --auto-grid-min-size: 16rem;
+}
+
+.auto-grid > * {
+  max-width: 400px;
+}
+
+.auto-grid > * + * {
+  margin-top: 1rem;
+}
+
+@supports (display: grid) {
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    grid-gap: 1rem;
+  }
+
+  .auto-grid > * {
+    max-width: unset;
+  }
+
+  .auto-grid > * + * {
+    margin-top: unset;
+  }
+}
+
+/*
+* WRAPPER
+* Because this .auto-grid utility will keep trying to fill remaining available space, it’s useful to either give the layout itself 
+* a maximum width or wrap it with a shared .wrapper utility. 
+* I prefer the latter approach because I work with design systems/components libraries a lot, 
+* so I’m very reticent to explicitly size a particular element, unless I absolutely have to.
+*
+* Because the .wrapper has a max-width set, it’ll support all viewports, too, without using media queries. 
+* The padding provides a gutter, so at tiny viewports, you get a 1rem sized gap at each side, which is ideal. 
+* The .wrapper is a responsive design power utility.
+*/
+.wrapper {
+  max-width: 65rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+/*
+* CENTER XY
+* The place-items property is a shorthand for justify-items and align-items, so because we’ve effectively set both to center, 
+* the direct descendants of .center-xy will be centered.
+*/
+.center-xy {
+  display: grid;
+  place-items: center;
+}
+/*
+* This will place all descendants in the center, so things get pretty wild when you have more than one descendant. 
+* That’s where this second, more resilient version of the utility steps in.
+*
+* We set the utility to use display: flex instead of using display: grid.
+*
+* The direct descendant has margin: auto which thanks to the Flexbox parent, will push itself into the center. 
+* 
+* The :only-child pseudo-selector means that the auto margin only gets applied if there’s only one child. 
+*/
+.center-xy {
+  display: flex;
+}
+.center-xy > *:only-child {
+  margin: auto;
+}
+
+/*
+* FLUID TYPE
+* You set a min size and a max size (with optional min and max screen sizes), 
+* and the calc-based formula works out a fluid measure, on the fly, based on those 2 locks and the window’s current width.
+*
+* The best use of this utility is certainly in larger elements such as headings.
+*
+* Scale text based on viewport and the following variables. Props should be unitless, but will be converted
+* to REM units. E.G '1' will be converted to '1rem'
+*
+* --fluid-type-min-size: The smallest font size. Default 1
+* --fluid-type-max-size: The largest font size: Default 2
+* --fluid-type-min-screen: The smallest viewport size that this works for: Default 20
+* --fluid-type-max-screen: The largest viewport size that this works for: Default 88
+*/
+.fluid-type {
+  --fluid-type-min-size: 1;
+  --fluid-type-max-size: 2;
+  --fluid-type-min-screen: 20;
+  --fluid-type-max-screen: 88;
+
+  font-size: calc(
+    (var(--fluid-type-min-size) * 1rem) + (var(--fluid-type-max-size) - var(--fluid-type-min-size)) *
+      (100vw - (var(--fluid-type-min-screen) * 1rem)) / (var(--fluid-type-max-screen) - var(--fluid-type-min-screen))
+  );
+}
+/*
+* SET LOCKS ON ELEMENTS EXAMPLES
+* h1.fluid-type {
+*   --fluid-type-min-size: 2;
+*   --fluid-type-max-size: 4;
+* }
+*
+* h2.fluid-type {
+*   --fluid-type-min-size: 1.5;
+*   --fluid-type-max-size: 2.2;
+* }
+*
+* blockquote.fluid-type {
+*   --fluid-type-min-size: 1.2;
+*   --fluid-type-max-size: 1.8;
+* } 
+*/
