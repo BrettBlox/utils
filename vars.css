@@ -1,0 +1,10 @@
+:root {
+    /* Gradient Colors */
+    --framer-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgb(0, 0, 0)),
+    linear-gradient(90deg, rgb(255, 0, 136), rgb(0, 153, 255));
+    --framer-light: linear-gradient(0deg, rgb(119, 0, 255), rgba(119, 0, 255, 0)),
+    linear-gradient(90deg, rgb(255, 0, 136), rgb(0, 153, 255));
+    --css-tricks: linear-gradient(90deg,#ff8a00,#e52e71);
+
+    /* Solid Colors */
+}
