@@ -1,10 +1,20 @@
 :root {
-    /* Gradient Colors */
-    --framer-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgb(0, 0, 0)),
+  /* Gradients */
+  --framer-dark: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgb(0, 0, 0)),
     linear-gradient(90deg, rgb(255, 0, 136), rgb(0, 153, 255));
-    --framer-light: linear-gradient(0deg, rgb(119, 0, 255), rgba(119, 0, 255, 0)),
+  --framer-light: linear-gradient(0deg, rgb(119, 0, 255), rgba(119, 0, 255, 0)),
     linear-gradient(90deg, rgb(255, 0, 136), rgb(0, 153, 255));
-    --css-tricks: linear-gradient(90deg,#ff8a00,#e52e71);
+  --css-tricks: linear-gradient(90deg, #ff8a00, #e52e71);
 
-    /* Solid Colors */
+  /* Consistent gradient for successive elements example from framer */
+  --gradient-el-0: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 0% / 100% 500% no-repeat;
+  --gradient-el-20: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 20% / 100% 500% no-repeat;
+  --gradient-el-40: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 40% / 100% 500% no-repeat;
+  --gradient-el-60: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 60% / 100% 500% no-repeat;
+  --gradient-el-80: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 80% / 100% 500% no-repeat;
+  --gradient-el-100: linear-gradient(180deg, #f08, #d0e, #91f, #70f, #40f, #05f, #09f) center 100% / 100% 500% no-repeat;
+
+  /* Solid Colors */
 }
+
+
