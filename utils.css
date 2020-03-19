@@ -5,12 +5,12 @@
 * --flow-space: The amount of space between siblings: Default 1em;
 */
 .flow {
-  --flow-space: 1em;
+	--flow-space: 1em;
 }
 
 .flow > * + * {
-  margin-top: 1em;
-  margin-top: var(--flow-space);
+	margin-top: 1em;
+	margin-top: var(--flow-space);
 }
 
 /*
@@ -20,15 +20,15 @@
 * assistive technology like screen readers. 
 */
 .visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: auto;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  white-space: nowrap;
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: auto;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	white-space: nowrap;
 }
 
 /*
@@ -45,9 +45,9 @@
 * with the viewport’s edges.
 */
 .full-bleed {
-  width: 100vw;
-  margin-left: 50%;
-  transform: translateX(-50%);
+	width: 100vw;
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
 /* 
@@ -68,25 +68,25 @@
 *
 */
 [class*='ratio-'] {
-  display: block;
-  position: relative;
+	display: block;
+	position: relative;
 }
 
 [class*='ratio-'] > * {
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .aspect-ratio-wide {
-  padding-top: 56.25%;
+	padding-top: 56.25%;
 }
 
 .aspect-ratio-square {
-  padding-top: 100%;
+	padding-top: 100%;
 }
 
 /*
@@ -104,19 +104,19 @@
 * This makes an already handy and progressive utility even more useful.
 */
 .scroll-track {
-  display: flex;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+	display: flex;
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 
 .scroll-track--fluid {
-  display: inline-flex;
+	display: inline-flex;
 }
 
 .scroll-track > * {
-  flex-shrink: 0;
+	flex-shrink: 0;
 }
 
 /*
@@ -135,11 +135,11 @@
 * it can be modified to work in specific contexts. This is handy for design system work.
 */
 .auto-grid {
-  --auto-grid-min-size: 16rem;
+	--auto-grid-min-size: 16rem;
 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-  grid-gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+	grid-gap: 1rem;
 }
 
 /*
@@ -150,31 +150,31 @@
 * You could also use the Scroll Track Utility as a happy medium.
 */
 .auto-grid {
-  --auto-grid-min-size: 16rem;
+	--auto-grid-min-size: 16rem;
 }
 
 .auto-grid > * {
-  max-width: 400px;
+	max-width: 400px;
 }
 
 .auto-grid > * + * {
-  margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 @supports (display: grid) {
-  .auto-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-    grid-gap: 1rem;
-  }
+	.auto-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+		grid-gap: 1rem;
+	}
 
-  .auto-grid > * {
-    max-width: unset;
-  }
+	.auto-grid > * {
+		max-width: unset;
+	}
 
-  .auto-grid > * + * {
-    margin-top: unset;
-  }
+	.auto-grid > * + * {
+		margin-top: unset;
+	}
 }
 
 /*
@@ -189,10 +189,10 @@
 * The .wrapper is a responsive design power utility.
 */
 .wrapper {
-  max-width: 65rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1rem;
+	max-width: 65rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 1rem;
 }
 
 /*
@@ -201,8 +201,8 @@
 * the direct descendants of .center-xy will be centered.
 */
 .center-xy {
-  display: grid;
-  place-items: center;
+	display: grid;
+	place-items: center;
 }
 /*
 * This will place all descendants in the center, so things get pretty wild when you have more than one descendant. 
@@ -215,10 +215,10 @@
 * The :only-child pseudo-selector means that the auto margin only gets applied if there’s only one child. 
 */
 .center-xy {
-  display: flex;
+	display: flex;
 }
 .center-xy > *:only-child {
-  margin: auto;
+	margin: auto;
 }
 
 /*
@@ -237,15 +237,15 @@
 * --fluid-type-max-screen: The largest viewport size that this works for: Default 88
 */
 .fluid-type {
-  --fluid-type-min-size: 1;
-  --fluid-type-max-size: 2;
-  --fluid-type-min-screen: 20;
-  --fluid-type-max-screen: 88;
+	--fluid-type-min-size: 1;
+	--fluid-type-max-size: 2;
+	--fluid-type-min-screen: 20;
+	--fluid-type-max-screen: 88;
 
-  font-size: calc(
-    (var(--fluid-type-min-size) * 1rem) + (var(--fluid-type-max-size) - var(--fluid-type-min-size)) *
-      (100vw - (var(--fluid-type-min-screen) * 1rem)) / (var(--fluid-type-max-screen) - var(--fluid-type-min-screen))
-  );
+	font-size: calc(
+		(var(--fluid-type-min-size) * 1rem) + (var(--fluid-type-max-size) - var(--fluid-type-min-size)) *
+			(100vw - (var(--fluid-type-min-screen) * 1rem)) / (var(--fluid-type-max-screen) - var(--fluid-type-min-screen))
+	);
 }
 /*
 * SET LOCKS ON ELEMENTS EXAMPLES
@@ -266,48 +266,72 @@
 */
 
 /* 
-CSS GRID
+* Other useful typography - when using rem for all font sizes. All fonts adjust accordingly 
+*/
+@media (min-width: 960px) {
+	:root {
+		/* ↓ Upscale by 25% at 960px */
+		font-size: 125%;
+	}
+}
+
+/* 
+* CSS GRID
 */
 
-/* FILL AVAILABLE SPACE -- RESPONSIVE */
+/* 
+* FILL AVAILABLE SPACE -- RESPONSIVE 
+*/
 .auto-fit {
-  grid-template-columns: repeat(auto-fit, minmax(var(--minimum-width-variable), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(var(--minimum-width-variable), 1fr));
 }
 
-/* GRID TEMPLATE COLUMNS BY COUNT */
+/* 
+* GRID TEMPLATE COLUMNS BY COUNT 
+*/
 .grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+	grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 .grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+	grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 .grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+	grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 .grid-cols-7 {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+	grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 .grid-cols-8 {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+	grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 .grid-cols-9 {
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+	grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 .grid-cols-10 {
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+	grid-template-columns: repeat(10, minmax(0, 1fr));
 }
 .grid-cols-11 {
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+	grid-template-columns: repeat(11, minmax(0, 1fr));
 }
 .grid-cols-12 {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* 
+* Position absolute center vertically and horizontally 
+*/
+.absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
